@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>
+            USL5
+        </title>
+        <meta charset="UTF-8">
+        
+        <script>console.log("start declaration of external files");</script>
+        
+        <!-- cordova -->
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        
+        <!-- jquery mobile -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="js/libs/jquery-mobile/jquery.mobile.css" />
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jquery-mobile/jquery.mobile.js"></script>
+        
+        <!-- initialization files -->
+        <script src="js/mainjs.js"></script>
+        
+        <!-- maps -->
+        <!--<script src="../plugins/plugin.google.maps/www/googlemaps-cdv-plugin.js"></script>--><!--not necessary if add maps plugin to config.xml-->
+        
+        <script>console.log("end declaration of external files");</script>
+        <style>
+            .ui-grid-a { text-align: center; }
+                
+            .ui-block-a, .ui-block-b { height: 100px }
+              
+            .icon-label { color: #000; display: block; font-size: 12px; }
+               
+            a:link, a:visited, a:hover, a:active { text-decoration: none; }
+        </style>
+        
+    </head>
+    <body>
+        <section id="index" data-role="page" data-fullscreen="true">
+            <div data-role="header" data-position="fixed" class="ui-state-persistent">
+                <h1>
+                    USL5
+                </h1>
+                <a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-btn-icon-right ui-icon-gear">
+                    Opzioni
+                </a>
+            </div>
+            <div data-role="content">
+                <div class="ui-grid-a">
+                    <!--icon from http://www.flaticon.com/free-icons/medical_224-->
+                    <div class="ui-block-a">
+                        <a href="prestazioni.html">
+                            <img src="img/prestazioni.png" />
+                        </a>
+                        <span class="icon-label">Prestazioni</span>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="liberaProfessione.html">
+                            <img src="img/liberaProfessione.png" />
+                        </a>
+                        <span class="icon-label">Libera professione</span>
+                    </div>
+                    <div class="ui-block-a">
+                        <a href="sedi.html">
+                            <img src="img/sedi.png" />
+                        </a>
+                        <span class="icon-label">Sedi</span>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="mappa.html">
+                            <img src="img/map.png" />
+                        </a>
+                        <span class="icon-label">Vicino a te</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

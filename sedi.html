@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>
+            Sedi
+        </title>
+        <meta charset="UTF-8">
+        
+        <!-- cordova -->
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        
+        <!-- jquery mobile -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="js/libs/jquery-mobile/jquery.mobile.css" />
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jquery-mobile/jquery.mobile.js"></script>
+    </head>
+    <body>
+        <section id="sedi" data-role="page" data-fullscreen="true" data-dom-cache="true">
+            <div data-role="header" data-position="fixed">
+                <h1>
+                    Sedi
+                </h1>
+            </div>
+            
+            <form class="ui-filterable">
+                <input id="myFilter4" data-type="search" placeholder="Sede ...">
+            </form>            
+            
+            <div data-role="content">
+                <ul id="listview4" data-role="listview" data-filter="true" data-input="#myFilter4" data-divider-theme="a">
+                    
+                </ul>
+            </div>
+            <script>
+                console.log("prefech data sedi");
+                $.support.cors=true;
+                $.mobile.allowCrossDomainPages = true;
+                
+                var località;
+                
+                $.getJSON('http://www.aimini.it/provaluigi/sedi.php?sedi=tutto&callback=?',function(data){
+                    $.each(data, function(i, dat){
+                        if(i===0){
+                            località=dat.loc;
+                            $("#listview4").append('<li data-role="list-divider">'+dat.loc+'</li>');
+                        }
+                        if(dat.loc===località){
+                        } else {
+                            località=dat.loc;
+                            $("#listview4").append('<li data-role="list-divider">'+dat.loc+'</li>');
+                        }
+                        $("#listview4").append('<li><a href="sediDettaglio.html" onclick="sessionStorage.setItem(\'sede\', this.text );">'+dat.nam+'</a></li>');
+                    });
+                    $('#listview4').listview('refresh');
+                });
+                console.log("fine generazione lista sedi");
+            </script>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            USL5
+        </title>
+        <!--<meta charset="UTF-8">-->
+        
+        <!-- cordova -->
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        
+        <!-- google maps api-->
+        <!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBvia6AZzUCcPbp6O3zeXpB_EwKqMCmO3A"></script>-->
+        
+        <!-- jquery mobile -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="js/libs/jquery-mobile/jquery.mobile.css" />
+        <script src="js/libs/jquery/jquery.js"></script>
+        <script src="js/libs/jquery-mobile/jquery.mobile.js"></script>
+        
+        
+    </head>
+    <body>
+        <section id="mappaoriginale" data-role="page" data-fullscreen="true">
+            <div data-role="header" data-position="fixed">
+                <h1>
+                    USL5
+                </h1>
+            </div>
+            <div data-role="content">
+                <p id="geolocation">Finding geolocation...</p>
+                <!--<p id="geolocation2">Finding geolocation...</p>-->
+                <div id="map" style="height: 300px; width: device-width;" ></div>
+                <script>
+                    var options, map, lat, lon;
+                    var firstTime = true;
+                    var homeMarker;
+                    
+                    function initialize(){
+                        //$("#geolocation2").text("success");
+                        var mapOptions = {
+                            center: new google.maps.LatLng(lat, lon),
+                            zoom: 16
+                        };
+                        map = new google.maps.Map(document.getElementById('map'),mapOptions);
+                        homeMarker = new google.maps.Marker({
+                            position: {lat: lat, lng: lon},
+                            map: map,
+                            title:"Sei qui",
+                            clickable:true,
+                            draggable:false
+                        });
+                    }
+                    
+                    function onSuccess(position) {
+                        lat=position.coords.latitude;
+                        lon=position.coords.longitude;
+                        $("#geolocation").text("success;"+lat+";"+lon+";");
+                        //initialize(position);
+                        if(firstTime===true){
+                            var script = document.createElement('script');
+                            script.type = 'text/javascript';
+                            script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+                                'callback=initialize';
+                            document.body.appendChild(script);
+                            firstTime=false;
+                        } else {
+                             //map.setCenter({lat: lat, lng: lon});
+                             homeMarker.setPosition({lat: lat, lng: lon});
+                        }
+                    }
+                    
+                    function onError(error) {
+                        $("#geolocation").text("fail");
+                    }
+                    
+                    options = {
+                        enableHighAccuracy: true,
+                        timeout: 5000, //commentando questa riga dovrebbe cambiare in automatico il centro ogni volta che c'è un cambiamento
+                        maximumAge: 0
+                    };
+                    
+                    var ll = navigator.geolocation.watchPosition(onSuccess, onError, options);
+                    
+                </script>
+            </div>
+        </section>
+    </body>
+</html>
